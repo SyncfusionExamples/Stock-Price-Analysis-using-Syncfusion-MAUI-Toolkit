@@ -58,7 +58,7 @@
             </HorizontalStackLayout>
 
 
-            <chart:SfCartesianChart Grid.Row="1" Grid.ColumnSpan="2"  Background="White" >
+            <chart:SfCartesianChart Grid.Row="1" Grid.ColumnSpan="2" EnableSideBySideSeriesPlacement="False" Background="White"  >
 
                 <chart:SfCartesianChart.Resources>
 
