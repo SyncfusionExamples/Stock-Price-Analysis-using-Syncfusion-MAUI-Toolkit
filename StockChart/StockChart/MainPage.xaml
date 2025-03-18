@@ -39,7 +39,7 @@
             </HorizontalStackLayout>
 
             <HorizontalStackLayout Grid.Row="0" Grid.Column="1" HorizontalOptions="End" VerticalOptions="End" Spacing="5" >
-                <segmentedControl:SfSegmentedControl x:Name="segmentedControl" SegmentWidth="{OnPlatform Android=30,iOS=30,Default=100}" WidthRequest="{OnPlatform Default=500,Android=150,iOS=150}" Stroke="#FF116DF9" StrokeThickness="2" CornerRadius="8" SelectionChanged="SfSegmentedControl_SelectionChanged">
+                <segmentedControl:SfSegmentedControl x:Name="segmentedControl" SegmentWidth="{OnPlatform Android=25,iOS=25,Default=100}" WidthRequest="{OnPlatform WinUI=500,MacCatalyst=500}" Stroke="#FF116DF9" StrokeThickness="2" CornerRadius="8" SelectionChanged="SfSegmentedControl_SelectionChanged">
                    
                     <segmentedControl:SfSegmentedControl.SelectionIndicatorSettings>
                         <segmentedControl:SelectionIndicatorSettings SelectionIndicatorPlacement="Fill"/>
@@ -58,7 +58,7 @@
             </HorizontalStackLayout>
 
 
-            <chart:SfCartesianChart Grid.Row="1" Grid.ColumnSpan="2" EnableSideBySideSeriesPlacement="False" Background="White"  >
+            <chart:SfCartesianChart Grid.Row="1" Grid.ColumnSpan="2" EnableSideBySideSeriesPlacement="False">
 
                 <chart:SfCartesianChart.Resources>
 
@@ -106,7 +106,7 @@
                 </chart:SfCartesianChart.Resources>
 
                 <chart:SfCartesianChart.XAxes>
-                    <chart:DateTimeAxis x:Name="xAxis"           
+                    <chart:DateTimeAxis x:Name="xAxis"  
                                         Minimum="{Binding RangeStart, Mode=TwoWay}"
                                         Maximum="{Binding RangeEnd, Mode=TwoWay}"
                                         TrackballLabelTemplate="{StaticResource axisLabelTemplate}" 
@@ -170,20 +170,12 @@
                     <chart:ChartTrackballBehavior ShowMarkers="False"></chart:ChartTrackballBehavior>
                 </chart:SfCartesianChart.TrackballBehavior>
 
-                <chart:SfCartesianChart.ZoomPanBehavior>
-                    <chart:ChartZoomPanBehavior EnablePanning="True" 
-                                                ZoomMode="X"
-                                                EnableDoubleTap="False" 
-                                                EnablePinchZooming="True">
-                    </chart:ChartZoomPanBehavior>
-                </chart:SfCartesianChart.ZoomPanBehavior>
-                
             </chart:SfCartesianChart>
 
 
             <sliders:SfDateTimeRangeSelector x:Name="Selector" Grid.Row="2" Grid.ColumnSpan="2"
                                              RangeStart="{Binding RangeStart, Mode=TwoWay}" 
-                                             RangeEnd="{Binding RangeEnd, Mode=TwoWay}"                                                                                    
+                                             RangeEnd="{Binding RangeEnd, Mode=TwoWay}" 
                                              Margin="50,0,-25,0" 
                                              Minimum="2023-11-08" 
                                              Maximum="2025-02-07"
@@ -191,8 +183,17 @@
                                              IntervalType="Months"
                                              Interval="2"
                                              ShowLabels="True"
-                                             ShowTicks="True">
-                
+                                             ShowTicks="True"
+                                             LabelsPlacement="OnTicks"
+                                             EdgeLabelsPlacement="Inside"
+                                             DragBehavior="Both" 
+                                             EnableDeferredUpdate="False">
+
+                <sliders:SfDateTimeRangeSelector.TrackStyle>
+                    <sliders:SliderTrackStyle ActiveFill="#512BD4"
+                                              InactiveFill="#DFD8F7" />
+                </sliders:SfDateTimeRangeSelector.TrackStyle>
+
                 <sliders:SfDateTimeRangeSelector.Tooltip>
                     <sliders:SliderTooltip DateFormat="dddd, MMM dd yyyy" 
                                            Fill="#DFD8F7"

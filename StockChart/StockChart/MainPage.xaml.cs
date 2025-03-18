@@ -1,7 +1,13 @@
-﻿namespace StockChart
+﻿using Syncfusion.Maui.Toolkit.Charts;
+using System.Diagnostics;
+
+namespace StockChart
 {
     public partial class MainPage : ContentPage
     {
+        bool isUpdatingRange = false;
+        bool isZooming = false;
+
         public MainPage()
         {
             InitializeComponent();
@@ -12,7 +18,7 @@
             if (e.NewValue is Syncfusion.Maui.Toolkit.SegmentedControl.SfSegmentItem selectedItem)
             {
                 DateTime startDate = new DateTime(2024, 01, 01);
-                DateTime endDate = startDate;
+                DateTime endDate = new DateTime(2024,06,30);
 
                 switch (selectedItem.Text)
                 {
