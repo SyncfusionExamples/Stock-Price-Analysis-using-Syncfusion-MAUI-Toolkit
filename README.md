@@ -5,7 +5,7 @@ This sample demonstrates a comprehensive stock analysis application that visuali
 ## Features
 
 ### Stock Price Chart
-Displays the stock's **open, high, low, and close** prices using a [**Candle Chart**](https://help.syncfusion.com/maui-toolkit/cartesian-charts/candle).
+Displays the stock's open, high, low, and close prices using a [**Candle Chart**](https://help.syncfusion.com/maui-toolkit/cartesian-charts/candle).
 
 - **X-axis:** Represents the date.
 - **Y-axis:** Represents the stock price.
@@ -34,9 +34,8 @@ Users can switch between different time periods to observe stock market trends e
 - Improves user accessibility by enabling quick trend analysis through an interactive UI.
 
 ## Output
-Example Stock Analysis dashboard:
 
-![Stock Analysis Output Image]()
+![Stock Analysis Output Image](https://github.com/user-attachments/assets/5a761c80-232a-4503-83e6-166b4a3afad6)
 
 ## Troubleshooting
 
