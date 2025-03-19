@@ -1,12 +1,13 @@
-﻿using System.Collections.ObjectModel;
+using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.Reflection;
 
-namespace StockChart
-{
-    public class StockViewModel : INotifyPropertyChanged
-    {
+namespace StockChart;
+
+public class StockViewModel : INotifyPropertyChanged
+   {
         private ObservableCollection<StockModel>? _stockPrices;
         private DateTime _rangeStart = new DateTime(2024, 1, 1);
         private DateTime _rangeEnd = new DateTime(2024, 6, 30);
@@ -103,5 +104,4 @@ namespace StockChart
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
-    }
-}
+   }

@@ -1,6 +1,8 @@
-﻿namespace StockChart
-{
-    public class StockModel
+using System;
+
+namespace StockChart;
+
+ public class StockModel
     {
         public DateTime Date { get; }
         public double Open { get; }
@@ -19,4 +21,3 @@
             Volume = volume;
         }
     }
-}

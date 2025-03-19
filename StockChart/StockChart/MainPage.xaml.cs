@@ -1,16 +1,12 @@
-﻿using Syncfusion.Maui.Toolkit.Charts;
-using System.Diagnostics;
+﻿namespace StockChart;
 
-namespace StockChart
+public partial class MainPage : ContentPage
 {
-    public partial class MainPage : ContentPage
-    {
-        public MainPage()
-        {
-            InitializeComponent();
-        }
-
-        private void SfSegmentedControl_SelectionChanged(object sender, Syncfusion.Maui.Toolkit.SegmentedControl.SelectionChangedEventArgs e)
+	public MainPage()
+	{
+		InitializeComponent();
+	}
+	private void SfSegmentedControl_SelectionChanged(object sender, Syncfusion.Maui.Toolkit.SegmentedControl.SelectionChangedEventArgs e)
         {
             if (e.NewValue is Syncfusion.Maui.Toolkit.SegmentedControl.SfSegmentItem selectedItem)
             {
@@ -46,5 +42,5 @@ namespace StockChart
                 TextColor = Colors.Black
             };
         }
-    }
 }
+
