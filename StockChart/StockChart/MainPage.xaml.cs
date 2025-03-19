@@ -5,9 +5,6 @@ namespace StockChart
 {
     public partial class MainPage : ContentPage
     {
-        bool isUpdatingRange = false;
-        bool isZooming = false;
-
         public MainPage()
         {
             InitializeComponent();
