@@ -35,7 +35,7 @@ Users can switch between different time periods to observe stock market trends e
 
 ## Output
 
-![Stock Analysis Output Image](https://github.com/user-attachments/assets/5a761c80-232a-4503-83e6-166b4a3afad6)
+![stock analysis output image](https://github.com/user-attachments/assets/81f39270-6654-49de-948e-e16e7f372d37)
 
 ## Troubleshooting
 

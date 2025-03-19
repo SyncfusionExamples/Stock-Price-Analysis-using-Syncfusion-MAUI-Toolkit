@@ -1,5 +1,3 @@
-using System;
-
 namespace StockChart;
 
  public class StockModel

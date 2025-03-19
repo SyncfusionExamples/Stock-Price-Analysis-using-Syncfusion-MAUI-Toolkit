@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="StockChart.MainPage"
-              xmlns:sliders="clr-namespace:Syncfusion.Maui.Sliders;assembly=Syncfusion.Maui.Sliders"
+             xmlns:sliders="clr-namespace:Syncfusion.Maui.Sliders;assembly=Syncfusion.Maui.Sliders"
              xmlns:chart="clr-namespace:Syncfusion.Maui.Toolkit.Charts;assembly=Syncfusion.Maui.Toolkit"
              xmlns:segmentedControl="clr-namespace:Syncfusion.Maui.Toolkit.SegmentedControl;assembly=Syncfusion.Maui.Toolkit"
              xmlns:local="clr-namespace:StockChart">
@@ -10,37 +10,35 @@
     <ContentPage.BindingContext>
         <local:StockViewModel x:Name="viewModel"></local:StockViewModel>
     </ContentPage.BindingContext>
-    
+
     <Border Margin="15" StrokeThickness="2"  Stroke="#79747E">
-        
+
         <Border.StrokeShape>
             <RoundRectangle CornerRadius="10"/>
         </Border.StrokeShape>
 
-        <Grid RowDefinitions="Auto,3*,140" ColumnDefinitions="*,*" Margin="10,-10,20,15" >
+        <Grid RowDefinitions="1.5*,6.5*,2*" ColumnDefinitions="*,*" Margin="10,-10,20,15" >
 
             <HorizontalStackLayout Grid.Row="0" Grid.Column="0" Margin="{ OnPlatform iOS='0,0,2,40',Android='0,0,2,40',Default='-20,0,0,0'}">
-                
-                <Image Source="stockchart.png" WidthRequest="{OnPlatform Android=80,Default=120,iOS=80}" HeightRequest="{OnPlatform Android=80,Default=120,iOS=80}" />
+                <Image Source="stockchart.png" WidthRequest="{OnPlatform Android=60,Default=90,iOS=60}" HeightRequest="{OnPlatform Android=60,Default=90,iOS=60}" />
                 <VerticalStackLayout  VerticalOptions="Center">
-                    <Label Text="Stock Chart"
-                           FontSize="{OnPlatform Default=Title,Android=Subtitle}"
+                    <Label Text="{OnPlatform Default='Analyzing Stock Price Trends and Market Movements',Android='Analysis Stock Trends and Market Movements',iOS='Analysis Stock Trends and Market Movements'} "
+                           FontSize="{OnPlatform Default=22,Android=14,iOS=14}"
                            VerticalOptions="Center"
                            FontAttributes="Bold"
-                           TextColor="Black"/>
-                    <Label Text="{OnPlatform  iOS='Analyzing Amazon Stock Market &amp; Trends',Android='Analyzing Amazon Stock Market &amp; Trends', Default='Analyzing Amazon Stock Trends &amp; Market Insights'}"
+                           TextColor="Gray"/>
+                    <Label Text="Tracking Growth, Risks, and Investment Opportunities"
                            LineBreakMode="WordWrap"
-                           HorizontalOptions="Center"
-                           FontSize="{OnPlatform Default=Title,Android=13,iOS=13}"
+                           HorizontalOptions="Start"
+                           FontSize="{OnPlatform Default=16,Android=11,iOS=11}"
                            VerticalOptions="Center"
-                           TextColor="Black"/>
+                           TextColor="Gray"/>
                 </VerticalStackLayout>
-                
             </HorizontalStackLayout>
 
             <HorizontalStackLayout Grid.Row="0" Grid.Column="1" HorizontalOptions="End" VerticalOptions="End" Spacing="5" >
-                <segmentedControl:SfSegmentedControl x:Name="segmentedControl" SegmentWidth="{OnPlatform Android=25,iOS=25,Default=100}" WidthRequest="{OnPlatform WinUI=500,MacCatalyst=500}" Stroke="#FF116DF9" StrokeThickness="2" CornerRadius="8" SelectionChanged="SfSegmentedControl_SelectionChanged">
-                   
+                <segmentedControl:SfSegmentedControl x:Name="segmentedControl" SegmentWidth="{OnPlatform Android=30,iOS=30,Default=100}" WidthRequest="{OnPlatform WinUI=500,MacCatalyst=500}" Stroke="#FF116DF9" StrokeThickness="2" CornerRadius="8" SelectionChanged="SfSegmentedControl_SelectionChanged">
+
                     <segmentedControl:SfSegmentedControl.SelectionIndicatorSettings>
                         <segmentedControl:SelectionIndicatorSettings SelectionIndicatorPlacement="Fill"/>
                     </segmentedControl:SfSegmentedControl.SelectionIndicatorSettings>
@@ -57,52 +55,46 @@
                 </segmentedControl:SfSegmentedControl>
             </HorizontalStackLayout>
 
-
             <chart:SfCartesianChart Grid.Row="1" Grid.ColumnSpan="2" EnableSideBySideSeriesPlacement="False">
 
                 <chart:SfCartesianChart.Resources>
-
                     <DataTemplate x:Key="axisLabelTemplate">
-                       
-                            <HorizontalStackLayout>
-                                <Label Text="{Binding }" 
+                        <HorizontalStackLayout>
+                            <Label Text="{Binding }" 
                                        FontSize="12" 
                                        Padding="5,0,0,0"
                                        WidthRequest="65"
-                                       HeightRequest="20"
+                                       HeightRequest="18"
                                        FontAttributes="Bold"
                                        TextColor="White" 
                                        HorizontalOptions="Center"></Label>
-                            </HorizontalStackLayout>
+                        </HorizontalStackLayout>
                     </DataTemplate>
 
                     <DataTemplate x:Key="trackballLabelTemplate">
-                        <Border BackgroundColor="White" Padding="10" Stroke="Gray">
-                            <VerticalStackLayout Spacing="6">
-                                <HorizontalStackLayout Spacing="8">
-                                    <Label Text="📥 Open:" FontSize="12" FontAttributes="Bold" TextColor="DarkGray"/>
-                                    <Label Text="{Binding DataItem.Open, StringFormat=' ${0}'}" FontSize="12" TextColor="Black"/>
-                                </HorizontalStackLayout>
-                                <HorizontalStackLayout Spacing="8">
-                                    <Label Text="📤 Close:" FontSize="12" FontAttributes="Bold" TextColor="DarkGray"/>
-                                    <Label Text="{Binding DataItem.Close, StringFormat=' ${0}'}" FontSize="12" TextColor="Black"/>
-                                </HorizontalStackLayout>
-                                <HorizontalStackLayout Spacing="8">
-                                    <Label Text="📈 High:" FontSize="12" FontAttributes="Bold" TextColor="DarkGray"/>
-                                    <Label Text="{Binding DataItem.High, StringFormat=' ${0}'}" FontSize="12" TextColor="Green"/>
-                                </HorizontalStackLayout>
-                                <HorizontalStackLayout Spacing="8">
-                                    <Label Text="📉 Low:" FontSize="12" FontAttributes="Bold" TextColor="DarkGray"/>
-                                    <Label Text="{Binding DataItem.Low, StringFormat=' ${0}'}" FontSize="12" TextColor="Red"/>
-                                </HorizontalStackLayout>
-                                <HorizontalStackLayout Spacing="8">
-                                    <Label Text="📦 Volume:" FontSize="12" FontAttributes="Bold" TextColor="DarkGray"/>
-                                    <Label Text="{Binding DataItem.Volume, StringFormat=' {0}M'}" FontSize="12" TextColor="Blue"/>
-                                </HorizontalStackLayout>
-                            </VerticalStackLayout>
-                        </Border>
+                        <VerticalStackLayout Spacing="6" Background="White" Padding="4" Margin="-2.5,-2,-2,-2">
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="Open:" FontSize="12" FontAttributes="Bold" TextColor="DarkGray"/>
+                                <Label Text="{Binding DataItem.Open, StringFormat=' ${0}'}" FontSize="12" TextColor="Black"/>
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="Close:" FontSize="12" FontAttributes="Bold" TextColor="DarkGray"/>
+                                <Label Text="{Binding DataItem.Close, StringFormat=' ${0}'}" FontSize="12" TextColor="Black"/>
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="High:" FontSize="12" FontAttributes="Bold" TextColor="DarkGray"/>
+                                <Label Text="{Binding DataItem.High, StringFormat=' ${0}'}" FontSize="12" TextColor="Green"/>
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="Low:" FontSize="12" FontAttributes="Bold" TextColor="DarkGray"/>
+                                <Label Text="{Binding DataItem.Low, StringFormat=' ${0}'}" FontSize="12" TextColor="Red"/>
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="Volume:" FontSize="12" FontAttributes="Bold" TextColor="DarkGray"/>
+                                <Label Text="{Binding DataItem.Volume, StringFormat='{0:F2}M'}" FontSize="12" TextColor="Blue"/>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
                     </DataTemplate>
-
                 </chart:SfCartesianChart.Resources>
 
                 <chart:SfCartesianChart.XAxes>
@@ -195,21 +187,21 @@
                 </sliders:SfDateTimeRangeSelector.TrackStyle>
 
                 <sliders:SfDateTimeRangeSelector.Tooltip>
-                    <sliders:SliderTooltip DateFormat="dddd, MMM dd yyyy" 
+                    <sliders:SliderTooltip DateFormat="MMMM dd, yyyy" 
                                            Fill="#DFD8F7"
                                            Stroke="#512BD4"
                                            StrokeThickness="2"
                                            TextColor="#512BD4"
-                                           FontSize="14"
+                                           FontSize="{OnPlatform Default=14,Android=10,iOS=10}"
                                            FontAttributes="Bold"
-                                           Padding="12,12" />
+                                           Padding="{OnPlatform Default='12,12',Android='5,5',iOS='5,5' }"/>
                 </sliders:SfDateTimeRangeSelector.Tooltip>
-                
+
                 <sliders:SfDateTimeRangeSelector.ThumbStyle>
                     <sliders:SliderThumbStyle StrokeThickness="2" Stroke="#512BD4" Fill="#DFD8F7" />
                 </sliders:SfDateTimeRangeSelector.ThumbStyle>
 
-                <chart:SfCartesianChart>
+                <chart:SfCartesianChart MinimumHeightRequest="100">
 
                     <chart:SfCartesianChart.Resources>
                         <LinearGradientBrush x:Key="SplineAreaGradient" StartPoint="0.5,1" EndPoint="0.5,0">
@@ -241,8 +233,6 @@
                 </chart:SfCartesianChart>
 
             </sliders:SfDateTimeRangeSelector>
-
         </Grid>
     </Border>
-
 </ContentPage>
