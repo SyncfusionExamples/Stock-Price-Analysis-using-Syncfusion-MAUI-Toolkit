@@ -22,7 +22,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="1.5*"/>
                 <RowDefinition Height="6.5*"/>
-                <RowDefinition Height="{OnPlatform Android='2.5*',iOS='2.5*',Default=150}"/>
+                <RowDefinition Height="{OnPlatform Android='2*',iOS='2*',Default=150}"/>
             </Grid.RowDefinitions>
 
             <HorizontalStackLayout Grid.Row="0" Grid.Column="0" Margin="{ OnPlatform iOS='0,0,2,40',Android='0,0,2,40',Default='-20,0,0,0'}">
