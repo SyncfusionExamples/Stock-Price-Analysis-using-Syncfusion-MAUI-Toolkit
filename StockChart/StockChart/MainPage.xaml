@@ -64,19 +64,6 @@
             <chart:SfCartesianChart Grid.Row="1" Grid.ColumnSpan="2" EnableSideBySideSeriesPlacement="False">
 
                 <chart:SfCartesianChart.Resources>
-                    <DataTemplate x:Key="axisLabelTemplate">
-                        <HorizontalStackLayout>
-                            <Label Text="{Binding }" 
-                                       FontSize="12" 
-                                       Padding="5,0,0,0"
-                                       WidthRequest="65"
-                                       HeightRequest="18"
-                                       FontAttributes="Bold"
-                                       TextColor="White" 
-                                       HorizontalOptions="Center"></Label>
-                        </HorizontalStackLayout>
-                    </DataTemplate>
-
                     <DataTemplate x:Key="trackballLabelTemplate">
                         <VerticalStackLayout Spacing="6" Background="White" Padding="4" Margin="-2.5,-2,-2,-2">
                             <HorizontalStackLayout Spacing="8">
@@ -107,10 +94,12 @@
                     <chart:DateTimeAxis x:Name="xAxis"  
                                         Minimum="{Binding RangeStart, Mode=TwoWay}"
                                         Maximum="{Binding RangeEnd, Mode=TwoWay}"
-                                        TrackballLabelTemplate="{StaticResource axisLabelTemplate}" 
                                         ShowTrackballLabel="True"
                                         ShowMajorGridLines="False"
                                         LabelCreated="Primary_LabelCreated">
+                        <chart:DateTimeAxis.TrackballLabelStyle>
+                            <chart:ChartAxisLabelStyle LabelFormat="MMM dd, yyyy" Background="Black" TextColor="White"/>
+                        </chart:DateTimeAxis.TrackballLabelStyle>
                     </chart:DateTimeAxis>
                 </chart:SfCartesianChart.XAxes>
 
