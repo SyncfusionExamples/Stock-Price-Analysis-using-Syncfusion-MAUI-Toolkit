@@ -17,7 +17,13 @@
             <RoundRectangle CornerRadius="10"/>
         </Border.StrokeShape>
 
-        <Grid RowDefinitions="1.5*,6.5*,2*" ColumnDefinitions="*,*" Margin="10,-10,20,15" >
+        <Grid  ColumnDefinitions="*,*" Margin="10,-10,20,15" >
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="6.5*"/>
+                <RowDefinition Height="{OnPlatform Android='2.5*',iOS='2.5*',Default=150}"/>
+            </Grid.RowDefinitions>
 
             <HorizontalStackLayout Grid.Row="0" Grid.Column="0" Margin="{ OnPlatform iOS='0,0,2,40',Android='0,0,2,40',Default='-20,0,0,0'}">
                 <Image Source="stockchart.png" WidthRequest="{OnPlatform Android=60,Default=90,iOS=60}" HeightRequest="{OnPlatform Android=60,Default=90,iOS=60}" />
@@ -26,13 +32,13 @@
                            FontSize="{OnPlatform Default=22,Android=14,iOS=14}"
                            VerticalOptions="Center"
                            FontAttributes="Bold"
-                           TextColor="Gray"/>
+                           TextColor="Black"/>
                     <Label Text="Tracking Growth, Risks, and Investment Opportunities"
                            LineBreakMode="WordWrap"
                            HorizontalOptions="Start"
                            FontSize="{OnPlatform Default=16,Android=11,iOS=11}"
                            VerticalOptions="Center"
-                           TextColor="Gray"/>
+                           TextColor="Black"/>
                 </VerticalStackLayout>
             </HorizontalStackLayout>
 
@@ -103,7 +109,8 @@
                                         Maximum="{Binding RangeEnd, Mode=TwoWay}"
                                         TrackballLabelTemplate="{StaticResource axisLabelTemplate}" 
                                         ShowTrackballLabel="True"
-                                        ShowMajorGridLines="False">
+                                        ShowMajorGridLines="False"
+                                        LabelCreated="Primary_LabelCreated">
                     </chart:DateTimeAxis>
                 </chart:SfCartesianChart.XAxes>
 
@@ -143,7 +150,7 @@
                                         High="High"
                                         Low="Low"
                                         EnableSolidCandle="True"
-                                        BearishFill="red"
+                                        BearishFill="Red"
                                         BullishFill="Green"
                                         Close="Close"
                                         ShowTrackballLabel="True"
@@ -180,20 +187,20 @@
                                              EdgeLabelsPlacement="Inside"
                                              DragBehavior="Both" 
                                              EnableDeferredUpdate="False">
-
+                
                 <sliders:SfDateTimeRangeSelector.TrackStyle>
-                    <sliders:SliderTrackStyle ActiveFill="#512BD4"
+                    <sliders:SliderTrackStyle ActiveFill="#512BD4" 
                                               InactiveFill="#DFD8F7" />
                 </sliders:SfDateTimeRangeSelector.TrackStyle>
 
                 <sliders:SfDateTimeRangeSelector.Tooltip>
-                    <sliders:SliderTooltip DateFormat="MMMM dd, yyyy" 
-                                           Fill="#DFD8F7"
-                                           Stroke="#512BD4"
-                                           StrokeThickness="2"
-                                           TextColor="#512BD4"
-                                           FontSize="{OnPlatform Default=14,Android=10,iOS=10}"
-                                           FontAttributes="Bold"
+                    <sliders:SliderTooltip DateFormat="MMM dd, yyyy"  
+                                           Fill="#DFD8F7" 
+                                           Stroke="#512BD4" 
+                                           StrokeThickness="2" 
+                                           TextColor="#512BD4" 
+                                           FontSize="{OnPlatform Default=14,Android=10,iOS=10}" 
+                                           FontAttributes="Bold" 
                                            Padding="{OnPlatform Default='12,12',Android='5,5',iOS='5,5' }"/>
                 </sliders:SfDateTimeRangeSelector.Tooltip>
 
@@ -201,7 +208,7 @@
                     <sliders:SliderThumbStyle StrokeThickness="2" Stroke="#512BD4" Fill="#DFD8F7" />
                 </sliders:SfDateTimeRangeSelector.ThumbStyle>
 
-                <chart:SfCartesianChart MinimumHeightRequest="100">
+                <chart:SfCartesianChart>
 
                     <chart:SfCartesianChart.Resources>
                         <LinearGradientBrush x:Key="SplineAreaGradient" StartPoint="0.5,1" EndPoint="0.5,0">
