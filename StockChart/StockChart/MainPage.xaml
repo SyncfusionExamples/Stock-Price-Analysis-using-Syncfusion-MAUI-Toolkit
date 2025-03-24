@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StockChart.MainPage"
+             xmlns:sliders="clr-namespace:Syncfusion.Maui.Sliders;assembly=Syncfusion.Maui.Sliders"
+             xmlns:chart="clr-namespace:Syncfusion.Maui.Toolkit.Charts;assembly=Syncfusion.Maui.Toolkit"
+             xmlns:segmentedControl="clr-namespace:Syncfusion.Maui.Toolkit.SegmentedControl;assembly=Syncfusion.Maui.Toolkit"
+             xmlns:local="clr-namespace:StockChart">
+
+    <ContentPage.BindingContext>
+        <local:StockViewModel x:Name="viewModel"></local:StockViewModel>
+    </ContentPage.BindingContext>
+
+    <Border Margin="15" StrokeThickness="2"  Stroke="#79747E">
+
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="10"/>
+        </Border.StrokeShape>
+
+        <Grid  ColumnDefinitions="*,*" Margin="10,-10,20,15" >
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="6.5*"/>
+                <RowDefinition Height="{OnPlatform Android='2*',iOS='2*',Default=150}"/>
+            </Grid.RowDefinitions>
+
+            <HorizontalStackLayout Grid.Row="0" Grid.Column="0" Margin="{ OnPlatform iOS='0,0,2,40',Android='0,0,2,40',Default='-20,0,0,0'}">
+                <Image Source="stockchart.png" WidthRequest="{OnPlatform Android=60,Default=90,iOS=60}" HeightRequest="{OnPlatform Android=60,Default=90,iOS=60}" />
+                <VerticalStackLayout  VerticalOptions="Center">
+                    <Label Text="{OnPlatform Default='Analyzing Stock Price Trends and Market Movements',Android='Analysis Stock Trends and Market Movements',iOS='Analysis Stock Trends and Market Movements'} "
+                           FontSize="{OnPlatform Default=22,Android=14,iOS=14}"
+                           VerticalOptions="Center"
+                           FontAttributes="Bold"
+                           TextColor="Black"/>
+                    <Label Text="Tracking Growth, Risks, and Investment Opportunities"
+                           LineBreakMode="WordWrap"
+                           HorizontalOptions="Start"
+                           FontSize="{OnPlatform Default=16,Android=11,iOS=11}"
+                           VerticalOptions="Center"
+                           TextColor="Black"/>
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Grid.Row="0" Grid.Column="1" HorizontalOptions="End" VerticalOptions="End" Spacing="5" >
+                <segmentedControl:SfSegmentedControl x:Name="segmentedControl" SegmentWidth="{OnPlatform Android=30,iOS=30,Default=100}" WidthRequest="{OnPlatform WinUI=500,MacCatalyst=500}" Stroke="#FF116DF9" StrokeThickness="2" CornerRadius="8" SelectionChanged="SfSegmentedControl_SelectionChanged">
+
+                    <segmentedControl:SfSegmentedControl.SelectionIndicatorSettings>
+                        <segmentedControl:SelectionIndicatorSettings SelectionIndicatorPlacement="Fill"/>
+                    </segmentedControl:SfSegmentedControl.SelectionIndicatorSettings>
+
+                    <segmentedControl:SfSegmentedControl.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>3m</x:String>
+                            <x:String>6m</x:String>
+                            <x:String>9m</x:String>
+                            <x:String>1y</x:String>
+                            <x:String>All</x:String>
+                        </x:Array>
+                    </segmentedControl:SfSegmentedControl.ItemsSource>
+                </segmentedControl:SfSegmentedControl>
+            </HorizontalStackLayout>
+
+            <chart:SfCartesianChart Grid.Row="1" Grid.ColumnSpan="2" EnableSideBySideSeriesPlacement="False">
+
+                <chart:SfCartesianChart.Resources>
+                    <DataTemplate x:Key="trackballLabelTemplate">
+                        <VerticalStackLayout Spacing="6" Background="White" Padding="4" Margin="-2.5,-2,-2,-2">
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="Open:" FontSize="12" FontAttributes="Bold" TextColor="DarkGray"/>
+                                <Label Text="{Binding DataItem.Open, StringFormat=' ${0}'}" FontSize="12" TextColor="Black"/>
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="Close:" FontSize="12" FontAttributes="Bold" TextColor="DarkGray"/>
+                                <Label Text="{Binding DataItem.Close, StringFormat=' ${0}'}" FontSize="12" TextColor="Black"/>
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="High:" FontSize="12" FontAttributes="Bold" TextColor="DarkGray"/>
+                                <Label Text="{Binding DataItem.High, StringFormat=' ${0}'}" FontSize="12" TextColor="Green"/>
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="Low:" FontSize="12" FontAttributes="Bold" TextColor="DarkGray"/>
+                                <Label Text="{Binding DataItem.Low, StringFormat=' ${0}'}" FontSize="12" TextColor="Red"/>
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="Volume:" FontSize="12" FontAttributes="Bold" TextColor="DarkGray"/>
+                                <Label Text="{Binding DataItem.Volume, StringFormat='{0:F2}M'}" FontSize="12" TextColor="Blue"/>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </chart:SfCartesianChart.Resources>
+
+                <chart:SfCartesianChart.XAxes>
+                    <chart:DateTimeAxis x:Name="xAxis"  
+                                        Minimum="{Binding RangeStart, Mode=TwoWay}"
+                                        Maximum="{Binding RangeEnd, Mode=TwoWay}"
+                                        ShowTrackballLabel="True"
+                                        ShowMajorGridLines="False"
+                                        LabelCreated="Primary_LabelCreated">
+                        <chart:DateTimeAxis.TrackballLabelStyle>
+                            <chart:ChartAxisLabelStyle LabelFormat="MMM dd, yyyy" Background="Black" TextColor="White"/>
+                        </chart:DateTimeAxis.TrackballLabelStyle>
+                    </chart:DateTimeAxis>
+                </chart:SfCartesianChart.XAxes>
+
+                <chart:SfCartesianChart.YAxes>
+                    <chart:NumericalAxis x:Name="yAxis"
+                                         Minimum="80"
+                                         Interval="20"
+                                         ShowMajorGridLines="False" 
+                                         ShowMinorGridLines="False"
+                                         EdgeLabelsDrawingMode="Shift">
+                        <chart:NumericalAxis.LabelStyle>
+                            <chart:ChartAxisLabelStyle LabelFormat="$0"/>
+                        </chart:NumericalAxis.LabelStyle>
+                        <chart:NumericalAxis.Title>
+                            <chart:ChartAxisTitle Text="Stock Prices">
+                            </chart:ChartAxisTitle>
+                        </chart:NumericalAxis.Title>
+                    </chart:NumericalAxis>
+
+                    <chart:NumericalAxis Name="volumeAxis" 
+                                         Minimum="0"
+                                         Maximum="500" 
+                                         Interval="50" 
+                                         IsVisible="False"
+                                         EdgeLabelsDrawingMode="Shift"
+                                         ShowMajorGridLines="False" 
+                                         ShowMinorGridLines="False"
+                                         CrossesAt="2023-11-08">
+                    </chart:NumericalAxis>
+                </chart:SfCartesianChart.YAxes>
+
+                <chart:SfCartesianChart.Series>
+                    <chart:CandleSeries x:Name="stockseries"
+                                        ItemsSource="{Binding StockPrices}"
+                                        XBindingPath="Date"
+                                        Open="Open"
+                                        High="High"
+                                        Low="Low"
+                                        EnableSolidCandle="True"
+                                        BearishFill="Red"
+                                        BullishFill="Green"
+                                        Close="Close"
+                                        ShowTrackballLabel="True"
+                                        TrackballLabelTemplate="{StaticResource trackballLabelTemplate}"/>
+
+                    <chart:ColumnSeries x:Name="volumeSeries"
+                                        ItemsSource="{Binding StockPrices}"
+                                        XBindingPath="Date"
+                                        YBindingPath="Volume"      
+                                        ShowTrackballLabel="False"
+                                        Fill="#512BD4"
+                                        YAxisName="volumeAxis"/>
+                </chart:SfCartesianChart.Series>
+
+                <chart:SfCartesianChart.TrackballBehavior>
+                    <chart:ChartTrackballBehavior ShowMarkers="False"></chart:ChartTrackballBehavior>
+                </chart:SfCartesianChart.TrackballBehavior>
+
+            </chart:SfCartesianChart>
+
+
+            <sliders:SfDateTimeRangeSelector x:Name="Selector" Grid.Row="2" Grid.ColumnSpan="2"
+                                             RangeStart="{Binding RangeStart, Mode=TwoWay}" 
+                                             RangeEnd="{Binding RangeEnd, Mode=TwoWay}" 
+                                             Margin="50,0,-25,0" 
+                                             Minimum="2023-11-08" 
+                                             Maximum="2025-02-07"
+                                             DateFormat="MMM yyyy"
+                                             IntervalType="Months"
+                                             Interval="2"
+                                             ShowLabels="True"
+                                             ShowTicks="True"
+                                             LabelsPlacement="OnTicks"
+                                             EdgeLabelsPlacement="Inside"
+                                             DragBehavior="Both" 
+                                             EnableDeferredUpdate="False">
+                
+                <sliders:SfDateTimeRangeSelector.TrackStyle>
+                    <sliders:SliderTrackStyle ActiveFill="#512BD4" 
+                                              InactiveFill="#DFD8F7" />
+                </sliders:SfDateTimeRangeSelector.TrackStyle>
+
+                <sliders:SfDateTimeRangeSelector.Tooltip>
+                    <sliders:SliderTooltip DateFormat="MMM dd, yyyy"  
+                                           Fill="#DFD8F7" 
+                                           Stroke="#512BD4" 
+                                           StrokeThickness="2" 
+                                           TextColor="#512BD4" 
+                                           FontSize="{OnPlatform Default=14,Android=10,iOS=10}" 
+                                           FontAttributes="Bold" 
+                                           Padding="{OnPlatform Default='12,12',Android='5,5',iOS='5,5' }"/>
+                </sliders:SfDateTimeRangeSelector.Tooltip>
+
+                <sliders:SfDateTimeRangeSelector.ThumbStyle>
+                    <sliders:SliderThumbStyle StrokeThickness="2" Stroke="#512BD4" Fill="#DFD8F7" />
+                </sliders:SfDateTimeRangeSelector.ThumbStyle>
+
+                <chart:SfCartesianChart>
+
+                    <chart:SfCartesianChart.Resources>
+                        <LinearGradientBrush x:Key="SplineAreaGradient" StartPoint="0.5,1" EndPoint="0.5,0">
+                            <GradientStop Color="#F0F8FF" Offset="0.0"/>
+                            <GradientStop Color="#80C0E0" Offset="0.5"/>
+                            <GradientStop Color="#FF0080DF" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </chart:SfCartesianChart.Resources>
+
+                    <chart:SfCartesianChart.XAxes>
+                        <chart:DateTimeAxis IsVisible="False"
+                                            ShowMajorGridLines="False" />
+                    </chart:SfCartesianChart.XAxes>
+
+                    <chart:SfCartesianChart.YAxes>
+                        <chart:NumericalAxis IsVisible="False"
+                                             ShowMajorGridLines="False" />
+                    </chart:SfCartesianChart.YAxes>
+
+                    <chart:SfCartesianChart.Series>
+                        <chart:SplineAreaSeries ItemsSource="{Binding StockPrices}"
+                                                Opacity="0.7"
+                                                Stroke="#FF116DF9"
+                                                Fill="{StaticResource SplineAreaGradient}"
+                                                XBindingPath="Date"
+                                                YBindingPath="Volume">
+                        </chart:SplineAreaSeries>
+                    </chart:SfCartesianChart.Series>
+                </chart:SfCartesianChart>
+
+            </sliders:SfDateTimeRangeSelector>
+        </Grid>
+    </Border>
+</ContentPage>
