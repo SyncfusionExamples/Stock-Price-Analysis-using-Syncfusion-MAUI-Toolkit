@@ -8,6 +8,10 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
+        if(DeviceInfo.Platform == DevicePlatform.WinUI || DeviceInfo.Platform == DevicePlatform.MacCatalyst)
+        {
+            MyBorder.Style = (Style)Resources["PlatformSpecificBorder"];
+        }
     }
     private void SfSegmentedControl_SelectionChanged(object sender, Syncfusion.Maui.Toolkit.SegmentedControl.SelectionChangedEventArgs e)
     {
