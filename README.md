@@ -45,4 +45,4 @@ If you are facing a **Path too long** exception when building this project, foll
 2. Rename the repository to a shorter name.
 3. Reopen the project and build again.
 
-For a step-by-step guide, refer to [Stock Analysis using Syncfusion MAUI Toolkit]()
+For a step-by-step guide, refer to [Stock Analysis using Syncfusion MAUI Toolkit](https://www.syncfusion.com/blogs/post/analyze-stocks-in-maui-toolkit-chart)

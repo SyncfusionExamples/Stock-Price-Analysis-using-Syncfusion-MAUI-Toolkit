@@ -10,12 +10,19 @@
     <ContentPage.BindingContext>
         <local:StockViewModel x:Name="viewModel"></local:StockViewModel>
     </ContentPage.BindingContext>
+    
+    <ContentPage.Resources>
+        <Style x:Key="PlatformSpecificBorder" TargetType="Border">
+            <Setter Property="Margin" Value="15" />
+            <Setter Property="StrokeThickness" Value="2" />
+            <Setter Property="Stroke" Value="#79747E" />
+            <Setter Property="StrokeShape">
+                <RoundRectangle CornerRadius="10"/>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
 
-    <Border Margin="15" StrokeThickness="2"  Stroke="#79747E">
-
-        <Border.StrokeShape>
-            <RoundRectangle CornerRadius="10"/>
-        </Border.StrokeShape>
+    <Border x:Name="MyBorder">
 
         <Grid  ColumnDefinitions="*,*" Margin="10,-10,20,15" >
 
@@ -173,7 +180,7 @@
                                              ShowLabels="True"
                                              ShowTicks="True"
                                              LabelsPlacement="OnTicks"
-                                             EdgeLabelsPlacement="Inside"
+                                             EdgeLabelsPlacement="Default"
                                              DragBehavior="Both" 
                                              EnableDeferredUpdate="False">
                 
