@@ -180,7 +180,7 @@
                                              ShowLabels="True"
                                              ShowTicks="True"
                                              LabelsPlacement="OnTicks"
-                                             EdgeLabelsPlacement="Inside"
+                                             EdgeLabelsPlacement="Default"
                                              DragBehavior="Both" 
                                              EnableDeferredUpdate="False">
                 
